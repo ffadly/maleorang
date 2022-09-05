@@ -1,30 +1,46 @@
 buildscript {
+
+    ext.kotlin_version = '1.7.10'
     repositories {
         mavenCentral()
-        jcenter()
     }
     dependencies {
-        classpath "org.jetbrains.dokka:dokka-gradle-plugin:0.9.9"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.0.3"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+
+}
+
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'kotlin'
+    apply from: 'wrapper.gradle'
+    apply from: 'test.gradle'
+
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+        implementation "org.jetbrains.kotlin:kotlin-reflect"
+
+        implementation "com.google.guava:guava:31.1-jre"
+        implementation 'com.google.code.gson:gson:2.9.1'
+        implementation 'org.apache.httpcomponents:httpclient:4.5.13'
+        implementation 'joda-time:joda-time:2.11.1'
+        testImplementation 'org.testng:testng:7.6.1'
+
+    }
+    compileKotlin {
+        kotlinOptions {
+            jvmTarget = '11'
+            freeCompilerArgs += '-opt-in=kotlin.RequiresOptIn'
+        }
+    }
+    compileTestKotlin {
+        kotlinOptions {
+            jvmTarget = '11'
+            freeCompilerArgs += '-opt-in=kotlin.RequiresOptIn'
+        }
     }
 }
 
-apply from: 'wrapper.gradle'
-apply from: 'compile.gradle'
-apply from: 'test.gradle'
-apply from: 'publish.gradle'
-
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib:1.0.3"
-    compile "org.jetbrains.kotlin:kotlin-reflect:1.0.3"
-    compile "com.google.guava:guava:19.0"
-    compile 'com.google.code.gson:gson:2.7'
-    compile 'org.apache.httpcomponents:httpclient:4.5.2'
-    compile 'joda-time:joda-time:2.9.4'
-
-    testCompile 'org.testng:testng:6.8.21'
-}

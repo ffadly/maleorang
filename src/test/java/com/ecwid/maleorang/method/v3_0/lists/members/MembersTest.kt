@@ -14,24 +14,24 @@ class MembersTest
 @Parameters("mailchimp.test.apikey", "mailchimp.test.listid")
 constructor(private val apiKey: String, private val listId: String) {
 
-    @BeforeMethod
-    private fun cleanup() {
-        MailchimpClient(apiKey).use { client ->
-            var members: GetMembersMethod.Response = client.execute(GetMembersMethod(listId))
-            while (members.total_items!! > 0) {
-                for (member in members.members!!) {
-                    client.execute(DeleteMemberMethod(listId, member.email_address!!))
-                }
-
-                members = client.execute(GetMembersMethod(listId))
-            }
-        }
-    }
+//    @BeforeMethod
+//    private fun cleanup() {
+//        MailchimpClient(apiKey).use { client ->
+//            var members: GetMembersMethod.Response = client.execute(GetMembersMethod(listId))
+//            while (members.total_items!! > 0) {
+//                for (member in members.members!!) {
+//                    client.execute(DeleteMemberMethod(listId, member.email_address!!))
+//                }
+//
+//                members = client.execute(GetMembersMethod(listId))
+//            }
+//        }
+//    }
 
     @Test
     fun test_POST_PATCH() {
         MailchimpClient(apiKey).use { client ->
-            val email = "vasya.pupkin@gmail.com"
+            val email = "ferry.fadly.games33@gmail.com"
 
             // Get nonexistent
             try {
@@ -90,7 +90,7 @@ constructor(private val apiKey: String, private val listId: String) {
     @Test
     fun test_PUT() {
         MailchimpClient(apiKey).use { client ->
-            val email = "vasya.pupkin@gmail.com"
+            val email = "ferry.fadly.games34@gmail.com"
 
             // Get nonexistent
             try {
