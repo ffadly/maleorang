@@ -22,7 +22,7 @@ allprojects {
     apply from: 'gradle/compile.gradle'
     apply from: 'gradle/test.gradle'
 
-    group 'com.ffadly'
+    group 'io.github.ffadly'
     version '3.0-0.9.7'
 
     repositories {
