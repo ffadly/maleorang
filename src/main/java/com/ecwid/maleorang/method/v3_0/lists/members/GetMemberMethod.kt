@@ -18,7 +18,7 @@ class GetMemberMethod(
 ) : MailchimpMethod<MemberInfo>() {
     @JvmField
     @PathParam
-    val subscriber_hash: String = DigestUtils.md5Hex(email.toLowerCase())
+    val subscriber_hash: String = DigestUtils.md5Hex(email.lowercase())
 
     @JvmField
     @QueryStringParam

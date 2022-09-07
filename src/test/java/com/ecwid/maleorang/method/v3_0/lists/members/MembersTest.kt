@@ -14,31 +14,16 @@ class MembersTest
 @Parameters("mailchimp.test.apikey", "mailchimp.test.listid")
 constructor(private val apiKey: String, private val listId: String) {
 
-//    @BeforeMethod
-//    private fun cleanup() {
-//        MailchimpClient(apiKey).use { client ->
-//            var members: GetMembersMethod.Response = client.execute(GetMembersMethod(listId))
-//            while (members.total_items!! > 0) {
-//                for (member in members.members!!) {
-//                    client.execute(DeleteMemberMethod(listId, member.email_address!!))
-//                }
-//
-//                members = client.execute(GetMembersMethod(listId))
-//            }
-//        }
-//    }
-
     @Test
     fun test_POST_PATCH() {
         MailchimpClient(apiKey).use { client ->
-            val email = "ferry.fadly.games33@gmail.com"
+            val email = "ferry.fadly.games44@gmail.com"
 
-            // Get nonexistent
+            // Delete
             try {
-                client.execute(GetMemberMethod(listId, email))
-                fail()
-            } catch(e: MailchimpException) {
-                assertEquals(e.code, 404)
+                client.execute(DeleteMemberMethod(listId, email))
+            }catch(e : Exception ){
+                //nothing
             }
 
             // Creating the user
@@ -90,14 +75,13 @@ constructor(private val apiKey: String, private val listId: String) {
     @Test
     fun test_PUT() {
         MailchimpClient(apiKey).use { client ->
-            val email = "ferry.fadly.games34@gmail.com"
+            val email = "ferry.fadly.games55@gmail.com"
 
-            // Get nonexistent
+            // Delete
             try {
-                client.execute(GetMemberMethod(listId, email))
-                fail()
-            } catch(e: MailchimpException) {
-                assertEquals(e.code, 404)
+                client.execute(DeleteMemberMethod(listId, email))
+            }catch(e : Exception){
+                //nothing
             }
 
             // Create

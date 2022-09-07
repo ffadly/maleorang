@@ -61,7 +61,7 @@ open class MailchimpClient protected constructor (
 
             if (response.responseBody != null) {
                 try {
-                    val error = JsonParser().parse(response.responseBody).asJsonObject
+                    val error = JsonParser.parseString(response.responseBody).asJsonObject
                     code = error.get("status").asInt
                     description = error.get("detail").asString
                 } catch (e: Exception){}

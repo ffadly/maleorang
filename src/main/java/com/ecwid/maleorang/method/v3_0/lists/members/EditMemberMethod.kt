@@ -37,7 +37,7 @@ sealed class EditMemberMethod : MailchimpMethod<MemberInfo>() {
     ) : EditMemberMethod() {
         @JvmField
         @PathParam
-        val subscriber_hash: String = DigestUtils.md5Hex(email_address.toLowerCase())
+        val subscriber_hash: String = DigestUtils.md5Hex(email_address.lowercase())
     }
 
     /**
@@ -55,7 +55,7 @@ sealed class EditMemberMethod : MailchimpMethod<MemberInfo>() {
     ) : EditMemberMethod() {
         @JvmField
         @PathParam
-        val subscriber_hash: String = DigestUtils.md5Hex(email_address.toLowerCase())
+        val subscriber_hash: String = DigestUtils.md5Hex(email_address.lowercase())
 
         @JvmField
         @Field

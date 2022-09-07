@@ -6,22 +6,32 @@ buildscript {
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath("org.jetbrains.dokka:dokka-gradle-plugin:${kotlin_version}")
     }
 
 }
 
 allprojects {
-    apply plugin: 'java'
+
+    apply plugin: 'java-library'
+    apply plugin: 'maven-publish'
+    apply plugin: 'signing'
     apply plugin: 'kotlin'
-    apply from: 'wrapper.gradle'
-    apply from: 'test.gradle'
+    apply plugin: 'org.jetbrains.dokka'
+    apply from: 'gradle/wrapper.gradle'
+    apply from: 'gradle/compile.gradle'
+    apply from: 'gradle/test.gradle'
+
+    group 'com.ecwid'
+    version '3.0-0.9.7'
 
     repositories {
         mavenCentral()
     }
+
     dependencies {
         implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-        implementation "org.jetbrains.kotlin:kotlin-reflect"
+        implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 
         implementation "com.google.guava:guava:31.1-jre"
         implementation 'com.google.code.gson:gson:2.9.1'
@@ -42,5 +52,88 @@ allprojects {
             freeCompilerArgs += '-opt-in=kotlin.RequiresOptIn'
         }
     }
+
+
+    task javadocJar(type: Jar) {
+        classifier = 'javadoc'
+        from dokkaHtml
+    }
+
+    task sourcesJar(type: Jar) {
+        classifier = 'sources'
+        from sourceSets.main.allSource
+    }
+
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                artifactId = 'maleorang'
+                from components.java
+                artifact tasks["sourcesJar"]
+                artifact tasks["javadocJar"]
+
+                versionMapping {
+                    usage('java-api') {
+                        fromResolutionOf('runtimeClasspath')
+                    }
+                    usage('java-runtime') {
+                        fromResolutionResult()
+                    }
+                }
+                pom {
+                    name ='MailChimp API wrapper for Java'
+                    description = 'MailChimp API Wrapper for Java'
+                    url = 'https://github.com/Ecwid/maleorang'
+                    packaging = 'jar'
+                    licenses {
+                        license {
+                            name = 'The Apache License, Version 2.0'
+                            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        }
+                    }
+                    developers {
+                        developer {
+                            id = 'basil'
+                            name = 'Vasily Karyaev'
+                            email = 'v.karyaev@gmail.com'
+                        }
+                        developer {
+                            id = 'aqman1'
+                            name = 'Grigory Osin'
+                            email = 'aqman@ecwid.com'
+                        }
+                        developer {
+                            id = 'ffadly'
+                            name = 'Ferry Fadly'
+                            email = 'ferry.fadly@gmail.com'
+                        }
+                    }
+                    scm {
+                        connection = 'scm:git:git@github.com:Ecwid/maleorang.git'
+                        developerConnection = 'scm:git:git@github.com:Ecwid/maleorang.git'
+                        url = 'https://github.com/Ecwid/maleorang.git'
+                    }
+                }
+            }
+        }
+        repositories {
+            maven {
+                def releasesRepoUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2"
+                def snapshotsRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots"
+                url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+                credentials {
+                    username project.getProperty('sonatypeUsername')
+                    password project.getProperty('sonatypePassword')
+                }
+            }
+        }
+    }
+
+    signing {
+        required !version.endsWith('SNAPSHOT')
+        useInMemoryPgpKeys(project.getProperty('PGP_SIGNING_KEY'), project.getProperty('PGP_SIGNING_PASSWORD'))
+        sign(publishing.publications["mavenJava"])
+    }
+
 }
 

@@ -21,5 +21,5 @@ class DeleteMemberMethod(
 ) : MailchimpMethod<MailchimpObject>() {
         @JvmField
         @PathParam
-        val subscriber_hash: String = DigestUtils.md5Hex(email.toLowerCase())
+        val subscriber_hash: String = DigestUtils.md5Hex(email.lowercase())
 }
