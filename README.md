@@ -1,7 +1,19 @@
 ### General info
-MaleOrang provides access to [MailChimp API v3.0](http://developer.mailchimp.com/documentation/mailchimp/reference/overview/) methods from Java code. It is a replacement for [ecwid-mailchimp](https://github.com/Ecwid/ecwid-mailchimp/) which has now been deprecated.
+MaleOrang provides access to [MailChimp API v3.0](http://developer.mailchimp.com/documentation/mailchimp/reference/overview/) methods from Java code. It is a replacement and upgrade for [ecwid-mailchimp](https://github.com/Ecwid/maleorang/) which has now been inactive.
 
 MaleOrang is written in [Kotlin language](https://kotlinlang.org/) and can be used with any language which runs on JVM. Refer to the [javadoc pages](http://www.javadoc.io/doc/com.ecwid/maleorang/) for details.
+
+this version of MaleOrang has many upgrades :
+* compiled using JDK version 11 fom JDK 1.8 
+* gradle version 7.5
+* guava version 31.1-jre
+* gson version 2.9.1
+* httpclient version 4.5.13
+* joda-time version 2.11.1
+* testng version 7.6.1
+* kotlin version 1.7.10
+* dokka version 1.7.10
+
 
 ### Supported MailChimp API methods
 
@@ -21,3 +33,4 @@ However, it is easy to extend the API and add support for any method you need (s
 ### Build tools integration
 
 MaleOrang is accessible from [Maven Central](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22com.ecwid%22%20AND%20a%3A%22maleorang%22) so it can be easily integrated with your favorite build tools like Gradle or Maven.
+

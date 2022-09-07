@@ -22,7 +22,7 @@ allprojects {
     apply from: 'gradle/compile.gradle'
     apply from: 'gradle/test.gradle'
 
-    group 'com.ecwid'
+    group 'com.ffadly'
     version '3.0-0.9.7'
 
     repositories {
@@ -105,13 +105,13 @@ allprojects {
                         developer {
                             id = 'ffadly'
                             name = 'Ferry Fadly'
-                            email = 'ferry.fadly@gmail.com'
+                            email = 'ferry.fadly@attenza.nl'
                         }
                     }
                     scm {
-                        connection = 'scm:git:git@github.com:Ecwid/maleorang.git'
-                        developerConnection = 'scm:git:git@github.com:Ecwid/maleorang.git'
-                        url = 'https://github.com/Ecwid/maleorang.git'
+                        connection = 'scm:git:git@github.com:ffadly/maleorang.git'
+                        developerConnection = 'scm:git:git@github.com:ffadly/maleorang.git'
+                        url = 'https://github.com/ffadly/maleorang.git'
                     }
                 }
             }
