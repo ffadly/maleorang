@@ -32,5 +32,5 @@ However, it is easy to extend the API and add support for any method you need (s
 
 ### Build tools integration
 
-MaleOrang is accessible from [Maven Central](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22com.ecwid%22%20AND%20a%3A%22maleorang%22) so it can be easily integrated with your favorite build tools like Gradle or Maven.
+MaleOrang is accessible from [Maven Central](https://search.maven.org/search?q=maleorang) so it can be easily integrated with your favorite build tools like Gradle or Maven.
 

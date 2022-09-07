@@ -83,7 +83,7 @@ allprojects {
                 pom {
                     name ='MailChimp API wrapper for Java'
                     description = 'MailChimp API Wrapper for Java'
-                    url = 'https://github.com/Ecwid/maleorang'
+                    url = 'https://github.com/ffadly/maleorang'
                     packaging = 'jar'
                     licenses {
                         license {
@@ -105,7 +105,7 @@ allprojects {
                         developer {
                             id = 'ffadly'
                             name = 'Ferry Fadly'
-                            email = 'ferry.fadly@attenza.nl'
+                            email = 'ferry.fadly@gmail.com'
                         }
                     }
                     scm {
@@ -118,8 +118,8 @@ allprojects {
         }
         repositories {
             maven {
-                def releasesRepoUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2"
-                def snapshotsRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots"
+                def releasesRepoUrl = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+                def snapshotsRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
                 url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
                 credentials {
                     username project.getProperty('sonatypeUsername')
